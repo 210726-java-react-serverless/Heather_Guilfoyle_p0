@@ -23,6 +23,6 @@ public class WelcomeScreen extends Screens {
 
        System.out.print(menu);
 
-       String userSelection = consoleReader.readLine();
+       String userSelection = consoleReader.readLine(); //without this line the screen renders as a broken loop
     }
 }
