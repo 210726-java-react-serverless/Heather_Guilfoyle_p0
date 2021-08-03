@@ -26,7 +26,7 @@ public class ScreenRouter {
     }
 
     public Screens getCurrentScreen() {
-        return currentScreen; }
+        return currentScreen;
     }
 
 }
