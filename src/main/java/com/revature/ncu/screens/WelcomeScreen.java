@@ -24,5 +24,21 @@ public class WelcomeScreen extends Screens {
        System.out.print(menu);
 
        String userSelection = consoleReader.readLine(); //without this line the screen renders as a broken loop
+
+        switch (userSelection) {
+
+            case "1":
+                router.navigate("/login");
+                break;
+            case "2":
+                router.navigate("/register");
+            case "3":
+                System.out.println("Now Exiting");
+                System.exit(0); //TODO Needs to be fixed. This is apparently ugly.
+            default:
+                System.out.println("Please pick a number between 1 - 3");
+
+        }
+
     }
 }
