@@ -39,8 +39,6 @@ public class RegisterScreen extends Screens {
 
         //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
         System.out.println("Success");
-        try {
-
-        }
+        router.navigate("/welcome");
     }
 }

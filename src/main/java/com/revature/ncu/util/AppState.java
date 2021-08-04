@@ -1,5 +1,6 @@
 package com.revature.ncu.util;
 
+import com.revature.ncu.screens.LoginScreen;
 import com.revature.ncu.screens.RegisterScreen;
 import com.revature.ncu.screens.WelcomeScreen;
 
@@ -18,6 +19,7 @@ public class AppState {
 
         router.addScreen(new WelcomeScreen(consoleReader, router));
         router.addScreen(new RegisterScreen(consoleReader,router));
+        router.addScreen(new LoginScreen(consoleReader,router));
     }
 
     /**
