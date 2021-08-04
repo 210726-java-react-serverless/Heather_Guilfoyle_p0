@@ -1,8 +1,10 @@
 package com.revature.ncu.screens;
 
+import com.revature.ncu.models.AppUser;
 import com.revature.ncu.util.ScreenRouter;
 
 import java.io.BufferedReader;
+import java.sql.SQLOutput;
 
 public class RegisterScreen extends Screens {
 
@@ -29,10 +31,16 @@ public class RegisterScreen extends Screens {
         System.out.print("Password: ");
         String password = consoleReader.readLine();
 
-        System.out.print("Type \"S\" for student or \"F\" for faculty");
+        System.out.print("Type \"S\" for student or \"F\" for faculty: ");
         String memberType = consoleReader.readLine();
+
+        AppUser newUser = new AppUser(firstName, lastName, email, username, password, memberType);
+        System.out.println(newUser);
 
         //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
         System.out.println("Success");
+        try {
+
+        }
     }
 }

@@ -15,6 +15,8 @@ public class ScreenRouter {
         return this;
     }
     /**
+     * @param route
+     * Navigate changes the current screen to the route specified.
      * */
     public void navigate(String route) {
         for (Screens screen : screens) {
