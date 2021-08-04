@@ -32,9 +32,11 @@ public class WelcomeScreen extends Screens {
                 break;
             case "2":
                 router.navigate("/register");
+                break;
             case "3":
                 System.out.println("Now Exiting");
                 System.exit(0); //TODO Needs to be fixed. This is apparently ugly.
+                break;
             default:
                 System.out.println("Please pick a number between 1 - 3");
 
