@@ -1,6 +1,6 @@
 package com.revature.ncu.models;
 
-public class AppUser {
+public class User {
 
     private int id;
     private String firstName;
@@ -13,7 +13,7 @@ public class AppUser {
     /**
      * Consturctor Register Screen will access when making a new appUser*/
 
-    public AppUser(String firstName, String lastName, String email, String username, String password, String memberType){
+    public User(String firstName, String lastName, String email, String username, String password, String memberType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -22,7 +22,7 @@ public class AppUser {
         this.memberType = memberType;
     }
 
-    public AppUser( int id, String firstName, String lastName, String email, String username, String password, String memberType){
+    public User( int id, String firstName, String lastName, String email, String username, String password, String memberType){
         this(firstName, lastName, email, username, password, memberType);
         this.id =id;
     }
@@ -85,7 +85,7 @@ public class AppUser {
 
     @Override
     public String toString() {
-        return "AppUser[" +
+        return "User[" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
