@@ -1,8 +1,6 @@
 package com.revature.ncu.util;
 
-import com.revature.ncu.screens.LoginScreen;
-import com.revature.ncu.screens.RegisterScreen;
-import com.revature.ncu.screens.WelcomeScreen;
+import com.revature.ncu.screens.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,6 +18,8 @@ public class AppState {
         router.addScreen(new WelcomeScreen(consoleReader, router));
         router.addScreen(new RegisterScreen(consoleReader,router));
         router.addScreen(new LoginScreen(consoleReader,router));
+        router.addScreen(new StudentDashboard(consoleReader, router));
+        router.addScreen(new FacultyDashboard(consoleReader, router));
     }
 
     /**
