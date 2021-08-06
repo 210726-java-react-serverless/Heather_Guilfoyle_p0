@@ -1,6 +1,8 @@
 package com.revature.ncu.util;
 
+import com.revature.ncu.repositories.UserRepository;
 import com.revature.ncu.screens.*;
+import com.revature.ncu.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,8 +17,11 @@ public class AppState {
         router = new ScreenRouter();
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
+        UserRepository userRepo = new UserRepository();
+        UserService userService = new UserService(userRepo);
+
         router.addScreen(new WelcomeScreen(consoleReader, router));
-        router.addScreen(new RegisterScreen(consoleReader,router));
+        router.addScreen(new RegisterScreen(consoleReader,router, userService)); // TODO do that on all the screens that need userService
         router.addScreen(new LoginScreen(consoleReader,router));
         router.addScreen(new StudentDashboard(consoleReader, router));
         router.addScreen(new FacultyDashboard(consoleReader, router));

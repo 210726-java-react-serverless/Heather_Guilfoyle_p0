@@ -1,15 +1,19 @@
 package com.revature.ncu.screens;
 
-import com.revature.ncu.models.AppUser;
+import com.revature.ncu.models.User;
+import com.revature.ncu.services.UserService;
 import com.revature.ncu.util.ScreenRouter;
 
 import java.io.BufferedReader;
-import java.sql.SQLOutput;
+
 
 public class RegisterScreen extends Screens {
 
-    public RegisterScreen(BufferedReader consoleReader, ScreenRouter router) {
+    private final UserService userService;
+
+    public RegisterScreen(BufferedReader consoleReader, ScreenRouter router, UserService userService) {
         super("RegisterScreen", "/register", consoleReader, router);
+        this.userService = userService;
 
     }
     @Override
@@ -34,10 +38,11 @@ public class RegisterScreen extends Screens {
         System.out.print("Type \"S\" for student or \"F\" for faculty: ");
         String memberType = consoleReader.readLine();
 
-        AppUser newUser = new AppUser(firstName, lastName, email, username, password, memberType);
+        User newUser = new User(firstName, lastName, email, username, password, memberType);
         System.out.println(newUser);
 
         //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
+        userService.register(newUser);
         System.out.println("Success");
         router.navigate("/welcome");
     }

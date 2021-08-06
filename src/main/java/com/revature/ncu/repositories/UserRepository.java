@@ -1,16 +1,15 @@
 package com.revature.ncu.repositories;
 
-import com.mongodb.MongoClientSettings;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.revature.ncu.models.User;
+import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
 
-import java.util.Arrays;
+
 
 /*
 These fields will have language that connects to Mongo to fulfill these operations
@@ -33,12 +32,8 @@ public class UserRepository implements CrudRepository<User> {
     @Override
     public User save(User newUser) {
 
-        try (MongoClient mongoClient = MongoClients.create(
-                MongoClientSettings.builder()
-                        .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress("3.136.233.217", 27017))))
-                        .credential(MongoCredential.createScramSha1Credential("project0","ncu","revature".toCharArray()))
-                        .build()
-        )) {
+        try  {
+            MongoClient mongoClient = MongoFactory.getInstance().getConnection();
 
             MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
             MongoCollection<Document> usersCollection = ncuDb.getCollection("users");
@@ -46,7 +41,8 @@ public class UserRepository implements CrudRepository<User> {
                     .append("lastName", newUser.getLastName())
                     .append("email", newUser.getEmail())
                     .append("username", newUser.getUsername())
-                    .append("password", newUser.getPassword());
+                    .append("password", newUser.getPassword())
+                    .append("memberType", newUser.getMemberType());
 
             usersCollection.insertOne(newUserDoc);
 
