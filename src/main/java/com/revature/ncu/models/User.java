@@ -1,5 +1,8 @@
 package com.revature.ncu.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private int id;
@@ -12,7 +15,6 @@ public class User {
 
     /**
      * Consturctor Register Screen will access when making a new appUser*/
-
     public User(String firstName, String lastName, String email, String username, String password, String memberType){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,6 +27,11 @@ public class User {
     public User( int id, String firstName, String lastName, String email, String username, String password, String memberType){
         this(firstName, lastName, email, username, password, memberType);
         this.id =id;
+    }
+
+    //For Jack-son
+    public User(){
+        super();
     }
 
     public int getId() {

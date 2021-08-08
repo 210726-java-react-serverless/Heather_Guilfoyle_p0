@@ -1,13 +1,18 @@
 package com.revature.ncu.screens;
 
+import com.revature.ncu.models.User;
+import com.revature.ncu.services.UserService;
 import com.revature.ncu.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
 public class LoginScreen extends Screens {
 
-    public LoginScreen(BufferedReader consoleReader, ScreenRouter router){
+    private final UserService userService;
+
+    public LoginScreen(BufferedReader consoleReader, ScreenRouter router, UserService userService){
         super("LoginScreen", "/login", consoleReader, router);
+        this.userService = userService;
 
     }
 
@@ -21,6 +26,19 @@ public class LoginScreen extends Screens {
 
         System.out.print("Password: ");
         String password = consoleReader.readLine();
+
+        try {
+            User authUser = userService.login(username, password);
+
+                if(authUser.getMemberType().equalsIgnoreCase("f")) {
+                    router.navigate("/fdashboard");
+                }if(authUser.getMemberType().equalsIgnoreCase("s")){
+                    router.navigate("/sdashboard");
+                }
+
+        } catch (RuntimeException re) {
+            System.out.println("No user found");
+        }
 
         //TODO If username and password is correct navigate to correct dashboard otherwise have them try again.
     }

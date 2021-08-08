@@ -19,17 +19,18 @@ public class AppState {
         router = new ScreenRouter();
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
+        UserSession userSession = new UserSession();
         UserRepository userRepo = new UserRepository();
-        UserService userService = new UserService(userRepo);
+        UserService userService = new UserService(userRepo, userSession);
 
         CourseRepository courseRepo = new CourseRepository();
         CourseService courseService = new CourseService(courseRepo);
 
         router.addScreen(new WelcomeScreen(consoleReader, router));
         router.addScreen(new RegisterScreen(consoleReader,router, userService)); // TODO do that on all the screens that need userService
-        router.addScreen(new LoginScreen(consoleReader,router));
-        router.addScreen(new StudentDashboard(consoleReader, router));
-        router.addScreen(new FacultyDashboard(consoleReader, router, courseService));
+        router.addScreen(new LoginScreen(consoleReader,router, userService));
+        router.addScreen(new StudentDashboard(consoleReader, router, userSession));
+        router.addScreen(new FacultyDashboard(consoleReader, router, courseService, userSession));
     }
 
     /**

@@ -2,13 +2,16 @@ package com.revature.ncu.services;
 
 import com.revature.ncu.models.User;
 import com.revature.ncu.repositories.UserRepository;
+import com.revature.ncu.util.UserSession;
 
 public class UserService {
 
     private final UserRepository userRepo;
+    private final UserSession session;
 
-    public UserService(UserRepository userRepo) {
+    public UserService(UserRepository userRepo, UserSession session) {
         this.userRepo = userRepo;
+        this.session = session;
     }
 
     /**
@@ -27,7 +30,19 @@ public class UserService {
      * @param username
      * */
     public User login(String username, String password) {
-        return null;
+
+        if(username == null || username.trim().equals("") || password == null || password.trim().equals("")){
+         throw new RuntimeException("Invalid user credentials");
+        }
+
+        User authUser = userRepo.findByCredentials(username, password);
+
+        if (authUser == null) {
+          throw new RuntimeException("Invalid credentials provided!");
+        }
+
+        session.setCurrentUser(authUser);
+        return authUser;
     }
 
     /**
