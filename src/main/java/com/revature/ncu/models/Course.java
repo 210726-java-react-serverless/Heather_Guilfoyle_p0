@@ -1,5 +1,8 @@
 package com.revature.ncu.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {
 
     private String courseID;

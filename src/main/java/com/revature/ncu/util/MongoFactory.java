@@ -6,7 +6,6 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
