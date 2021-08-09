@@ -20,6 +20,10 @@ public class UserService {
      * */
 
     public User register(User newUser) {
+        if(!isUserValid(newUser)) {
+            throw new RuntimeException("Invalid data provided!");
+        }
+
         return userRepo.save(newUser);
     }
 
