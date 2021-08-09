@@ -1,5 +1,7 @@
 package com.revature.ncu.screens;
 
+import com.revature.ncu.models.Course;
+
 import com.revature.ncu.services.CourseService;
 import com.revature.ncu.util.ScreenRouter;
 import com.revature.ncu.util.UserSession;
@@ -36,6 +38,33 @@ public class FacultyDashboard extends Screens {
         switch (userSelection) {
 
             case "1":
+                System.out.println("\nAdd a new course!");
+
+                System.out.print("Course ID: ");
+                String courseID = consoleReader.readLine();
+
+                System.out.print("Course Name: ");
+                String courseName = consoleReader.readLine();
+
+                System.out.print("Course Description: ");
+                String courseDescription = consoleReader.readLine();
+
+                System.out.print("Professor: ");
+                String courseTeacher = consoleReader.readLine();
+
+                System.out.print("Meet Days: ");
+                String meetDay = consoleReader.readLine();
+
+                System.out.print("Time: ");
+                String meetTime = consoleReader.readLine();
+
+                Course newCourse = new Course(courseID, courseName, courseDescription, courseTeacher, meetDay, meetTime);
+                System.out.println(newCourse);
+
+                //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
+                courseService.register(newCourse);
+                System.out.println("Success");
+                router.navigate("/fdashboard");
 
                 break;
             case "2":
