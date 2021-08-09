@@ -68,7 +68,11 @@ public class FacultyDashboard extends Screens {
 
                 break;
             case "2":
-                router.navigate("/register");
+                System.out.println("Type the courseID for the course you would like to edit. ");
+                Course courseToEdit = courseService.search(consoleReader.readLine());
+                System.out.println(courseToEdit);
+
+
                 break;
             case "3":
                 System.out.println("Now Exiting");

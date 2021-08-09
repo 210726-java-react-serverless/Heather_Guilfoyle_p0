@@ -14,4 +14,9 @@ public class CourseService {
     public Course register(Course newCourse){
         return courseRepo.save(newCourse);
     }
+
+    public Course search(String courseID){
+        Course foundCourse = courseRepo.findByCourseID(courseID);
+        return foundCourse;
+    }
 }

@@ -25,6 +25,11 @@ public class Course {
 
     }
 
+    //for Jackson
+    public Course() {
+        super();
+    }
+
     public String getCourseID() {
         return courseID;
     }
