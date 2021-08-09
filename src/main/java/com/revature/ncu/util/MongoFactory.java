@@ -46,6 +46,11 @@ public class MongoFactory {
         }
 
     }
+
+    public void cleanUp(){
+        mongoClient.close();
+    }
+
     public static MongoFactory getInstance(){
         return mongoFactory;
     }
