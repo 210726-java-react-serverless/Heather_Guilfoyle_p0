@@ -19,4 +19,9 @@ public class CourseService {
         Course foundCourse = courseRepo.findByCourseID(courseID);
         return foundCourse;
     }
+
+    public Course delete(Course course){
+        Course removerCourse = courseRepo.removeCourse(course.getCourseID());
+        return removerCourse;
+    }
 }

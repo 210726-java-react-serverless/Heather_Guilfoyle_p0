@@ -75,8 +75,11 @@ public class FacultyDashboard extends Screens {
 
                 break;
             case "3":
-                System.out.println("Now Exiting");
-                System.exit(0); //TODO Needs to be fixed. This is apparently ugly.
+                System.out.print("type the courseID for the course you would like to remove. \n" +
+                ">");
+                Course courseToRemove = courseService.search(consoleReader.readLine());
+                System.out.println(courseToRemove);
+               Course courseToRemove2 = courseService.deletecla(courseToRemove);
                 break;
             default:
                 System.out.println("Please pick a number between 1 - 3");

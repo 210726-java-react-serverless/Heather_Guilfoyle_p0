@@ -12,6 +12,7 @@ import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
 
 public class CourseRepository implements CrudRepository<Course>{
+
    public Course findByCourseID(String courseID) {
 
        try {
@@ -64,6 +65,29 @@ public class CourseRepository implements CrudRepository<Course>{
 
 
             return newCourse;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return null;
+
+    }
+
+    public Course removeCourse(String courseID) {
+        try {
+            MongoClient mongoClient = MongoFactory.getInstance().getConnection();
+
+            MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
+            MongoCollection<Document> usersCollection = ncuDb.getCollection("classes");
+            Document queryDoc = new Document("courseID", courseID);
+            Document removeDoc = usersCollection.find(queryDoc).first();
+
+            if(removeDoc == null){
+                return null;
+            }
+
+            usersCollection.deleteOne(removeDoc);
 
         } catch (Exception e) {
             e.printStackTrace();
