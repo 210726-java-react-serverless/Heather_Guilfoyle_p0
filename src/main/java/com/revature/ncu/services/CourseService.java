@@ -24,4 +24,9 @@ public class CourseService {
         Course removerCourse = courseRepo.removeCourse(course.getCourseID());
         return removerCourse;
     }
+
+    public Course update(Course course, Course newCourseInfo){
+        Course updateCourse = courseRepo.updateCourse(course, newCourseInfo);
+        return updateCourse;
+    }
 }

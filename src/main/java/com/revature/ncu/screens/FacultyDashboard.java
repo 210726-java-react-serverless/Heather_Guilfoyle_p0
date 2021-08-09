@@ -68,12 +68,9 @@ public class FacultyDashboard extends Screens {
 
                 break;
             case "2":
-                System.out.println("Type the courseID for the course you would like to edit. ");
-                Course courseToEdit = courseService.search(consoleReader.readLine());
-                System.out.println(courseToEdit);
-
-
+                updateScreen();
                 break;
+
             case "3":
                 System.out.print("type the courseID for the course you would like to remove. \n" +
                 ">");
@@ -85,6 +82,63 @@ public class FacultyDashboard extends Screens {
                 System.out.println("Please pick a number between 1 - 3");
 
         }
+
+    }
+    private void updateScreen(){
+       try {
+           System.out.print("Type the courseID for the course you would like to edit. \n" +
+                   ">");
+           Course courseToEdit = courseService.search(consoleReader.readLine());
+           System.out.println(courseToEdit);
+           Course updatedCourse = courseToEdit.getCopy();
+
+           String menu = "\nPlease Select what info you wish to update\n" + //would like to add username to the welcome need to figure out how to read that off the login
+                   "1) Course Name\n" +
+                   "2) Course Description\n" +
+                   "3) Professor\n" +
+                   "4) MeetDay\n" +
+                   "5) Time\n" +
+                   "6) Back to Dashboard" +
+                   "> ";
+           System.out.print(menu);
+
+           String userSelection = consoleReader.readLine();
+
+           switch (userSelection) {
+               case "1":
+                   System.out.print("New Course Name\n" + ">");
+                   updatedCourse.setCourseName(consoleReader.readLine());
+                   courseService.update(courseToEdit, updatedCourse);
+                   break;
+               case "2":
+                   System.out.print("New Course Description\n" + ">");
+                   updatedCourse.setCourseDescription(consoleReader.readLine());
+                   courseService.update(courseToEdit, updatedCourse);
+                   break;
+               case "3":
+                   System.out.print("New Professor\n" + ">");
+                   updatedCourse.setCourseTeacher(consoleReader.readLine());
+                   courseService.update(courseToEdit, updatedCourse);
+                   break;
+               case "4":
+                   System.out.print("New Meeting Day\n" + ">");
+                   updatedCourse.setMeetDay(consoleReader.readLine());
+                   courseService.update(courseToEdit, updatedCourse);
+                   break;
+               case "5":
+                   System.out.print("New Time\n" + ">");
+                   updatedCourse.setMeetTime(consoleReader.readLine());
+                   courseService.update(courseToEdit, updatedCourse);
+                   break;
+               case "6":
+                   router.navigate("/fdashboard");
+                   break;
+               default:
+               System.out.print("Please pick a number between 1 - 6");
+           }
+       } catch (Exception e){
+           e.printStackTrace();
+       }
 
     }
 

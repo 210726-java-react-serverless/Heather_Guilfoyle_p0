@@ -78,6 +78,12 @@ public class Course {
         this.meetTime = meetTime;
     }
 
+    public Course getCopy(){
+
+        Course copy = new Course(this.courseID, this.courseName, this.courseDescription, this.courseTeacher, this.meetDay, this.meetTime);
+        return copy;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
