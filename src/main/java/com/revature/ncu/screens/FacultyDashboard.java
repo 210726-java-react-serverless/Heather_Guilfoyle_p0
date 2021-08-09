@@ -79,7 +79,7 @@ public class FacultyDashboard extends Screens {
                 ">");
                 Course courseToRemove = courseService.search(consoleReader.readLine());
                 System.out.println(courseToRemove);
-               Course courseToRemove2 = courseService.deletecla(courseToRemove);
+               Course courseToRemove2 = courseService.delete(courseToRemove);
                 break;
             default:
                 System.out.println("Please pick a number between 1 - 3");
