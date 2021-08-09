@@ -78,8 +78,12 @@ public class FacultyDashboard extends Screens {
                 System.out.println(courseToRemove);
                Course courseToRemove2 = courseService.delete(courseToRemove);
                 break;
+
+            case "4":
+                System.out.print("Navigating back to Welcome Screen");
+                router.navigate("/welcome");
             default:
-                System.out.println("Please pick a number between 1 - 3");
+                System.out.println("Please pick a number between 1 - 4");
 
         }
 
