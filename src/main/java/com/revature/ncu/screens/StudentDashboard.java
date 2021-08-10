@@ -56,7 +56,7 @@ public class StudentDashboard extends Screens {
             case "4":
                 System.out.print("type the courseID for the course you would like to remove. \n" +
                         ">");
-                UserSchedule courseToRemove = courseService.searchCourseToDelete(consoleReader.readLine());
+                UserSchedule courseToRemove = courseService.searchCourseToDelete(session.getCurrentUser().getUsername(), consoleReader.readLine());
                 System.out.println(courseToRemove);
                 break;
             case "5":

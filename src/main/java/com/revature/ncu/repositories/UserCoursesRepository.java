@@ -73,14 +73,14 @@ public class UserCoursesRepository implements CrudRepository<UserSchedule>{
         return null;
 
     }
-    public UserSchedule findByCourseID(String courseID) {
+    public UserSchedule findByCourseID(String username, String courseID) {
 
         try {
             MongoClient mongoClient = MongoFactory.getInstance().getConnection();
 
             MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
             MongoCollection<Document> usersCollection = ncuDb.getCollection("schedule");
-            Document queryDoc = new Document("courseID", courseID);
+            Document queryDoc = new Document("username", username).append("courseID", courseID);
             Document findCourseIDDoc = usersCollection.find(queryDoc).first();
 
             if (findCourseIDDoc == null) {
@@ -99,6 +99,29 @@ public class UserCoursesRepository implements CrudRepository<UserSchedule>{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public UserSchedule removeCourse(String username, String courseID) {
+        try {
+            MongoClient mongoClient = MongoFactory.getInstance().getConnection();
+
+            MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
+            MongoCollection<Document> usersCollection = ncuDb.getCollection("schedule");
+            Document queryDoc = new Document("username", username).append("courseID", courseID);
+            Document removeDoc = usersCollection.find(queryDoc).first();
+
+            if(removeDoc == null){
+                return null;
+            }
+
+            usersCollection.deleteOne(removeDoc);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return null;
+
     }
 
     @Override

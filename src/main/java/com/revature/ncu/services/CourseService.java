@@ -29,8 +29,8 @@ public class CourseService {
         Course foundCourse = courseRepo.findByCourseID(courseID);
         return foundCourse;
     }
-    public UserSchedule searchCourseToDelete(String courseID) {
-        UserSchedule findCourse = uCourseRepo.findByCourseID(courseID);
+    public UserSchedule searchCourseToDelete(String username, String courseID) {
+        UserSchedule findCourse = uCourseRepo.findByCourseID(username, courseID);
         return findCourse;
     }
 
