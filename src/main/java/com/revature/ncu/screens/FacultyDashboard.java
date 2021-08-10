@@ -76,7 +76,7 @@ public class FacultyDashboard extends Screens {
                 ">");
                 Course courseToRemove = courseService.search(consoleReader.readLine());
                 System.out.println(courseToRemove);
-               Course courseToRemove2 = courseService.delete(courseToRemove);
+                courseService.delete(courseToRemove);
                 break;
 
             case "4":
@@ -88,6 +88,7 @@ public class FacultyDashboard extends Screens {
         }
 
     }
+    //moved down here because I didn't want a switch case inside a switch case.
     private void updateScreen(){
        try {
            System.out.print("Type the courseID for the course you would like to edit. \n" +
