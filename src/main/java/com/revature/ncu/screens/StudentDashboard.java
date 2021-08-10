@@ -54,6 +54,11 @@ public class StudentDashboard extends Screens {
                 courseService.view(session.getCurrentUser().getUsername());
                 break;
             case "4":
+                System.out.print("type the courseID for the course you would like to remove. \n" +
+                        ">");
+                UserSchedule courseToRemove = courseService.searchCourseToDelete(consoleReader.readLine());
+                System.out.println(courseToRemove);
+                break;
             case "5":
                 System.out.print("Navigating back to Welcome Screen");
                 router.navigate("/welcome");

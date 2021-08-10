@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.revature.ncu.models.Course;
 import com.revature.ncu.models.UserSchedule;
 import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
@@ -71,6 +72,33 @@ public class UserCoursesRepository implements CrudRepository<UserSchedule>{
         }
         return null;
 
+    }
+    public UserSchedule findByCourseID(String courseID) {
+
+        try {
+            MongoClient mongoClient = MongoFactory.getInstance().getConnection();
+
+            MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
+            MongoCollection<Document> usersCollection = ncuDb.getCollection("schedule");
+            Document queryDoc = new Document("courseID", courseID);
+            Document findCourseIDDoc = usersCollection.find(queryDoc).first();
+
+            if (findCourseIDDoc == null) {
+                return null;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            UserSchedule foundCourse = mapper.readValue(findCourseIDDoc.toJson(), UserSchedule.class);
+            return foundCourse;
+
+        } catch (
+                JsonMappingException e) {
+            e.printStackTrace();
+        } catch (
+                JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

@@ -29,6 +29,10 @@ public class CourseService {
         Course foundCourse = courseRepo.findByCourseID(courseID);
         return foundCourse;
     }
+    public UserSchedule searchCourseToDelete(String courseID) {
+        UserSchedule findCourse = uCourseRepo.findByCourseID(courseID);
+        return findCourse;
+    }
 
     public Course delete(Course course){
         Course removerCourse = courseRepo.removeCourse(course.getCourseID());
