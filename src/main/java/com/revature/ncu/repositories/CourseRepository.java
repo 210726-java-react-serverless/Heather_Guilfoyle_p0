@@ -14,6 +14,10 @@ import com.revature.ncu.models.Course;
 import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
 
+import javax.print.Doc;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CourseRepository implements CrudRepository<Course>{
 
    public Course findByCourseID(String courseID) {
@@ -42,6 +46,34 @@ public class CourseRepository implements CrudRepository<Course>{
            e.printStackTrace();
        }
        return null;
+   }
+   public List<Course> findAll(){
+
+       List<Course> allCourseList = new ArrayList<>();
+       try {
+           MongoClient mongoClient = MongoFactory.getInstance().getConnection();
+           MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
+           MongoCollection<Document> usersCollection = ncuDb.getCollection("classes");
+           List<Document> courseList = usersCollection.find().into(new ArrayList<>());
+
+           ObjectMapper mapper = new ObjectMapper();
+
+           for(Document course : courseList){
+               Course courses = mapper.readValue(course.toJson(), Course.class);
+               allCourseList.add(courses);
+
+           }
+           return allCourseList;
+
+       } catch (
+               JsonMappingException e) {
+           e.printStackTrace();
+       } catch (
+               JsonProcessingException e) {
+           e.printStackTrace();
+       }
+       return null;
+
    }
 
     @Override

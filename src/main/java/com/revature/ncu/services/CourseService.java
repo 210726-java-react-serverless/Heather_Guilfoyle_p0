@@ -3,6 +3,8 @@ package com.revature.ncu.services;
 import com.revature.ncu.models.Course;
 import com.revature.ncu.repositories.CourseRepository;
 
+import java.util.List;
+
 public class CourseService {
 
     private final CourseRepository courseRepo;
@@ -28,5 +30,9 @@ public class CourseService {
     public Course update(Course course, Course newCourseInfo){
         Course updateCourse = courseRepo.updateCourse(course, newCourseInfo);
         return updateCourse;
+    }
+
+    public List<Course> viewAll(){
+        return courseRepo.findAll();
     }
 }
