@@ -1,17 +1,19 @@
 package com.revature.ncu.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserSchedule {
 
-    private String userName;
+    //@JsonProperty("username")
+    private String username;
     private String courseID;
     private String courseName;
     private String meetDay;
     private String meetTime;
 
-    public UserSchedule(String userName, String courseID, String courseName,  String meetDay, String meetTime) {
+    public UserSchedule(String username, String courseID, String courseName, String meetDay, String meetTime) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.meetDay = meetDay;
@@ -23,8 +25,8 @@ public class UserSchedule {
         super();
     }
 
-    public UserSchedule(Course course, String userName){
-        this.userName = userName;
+    public UserSchedule(Course course, String username){
+        this.username = username;
         this.courseID = course.getCourseID();
         this.courseName = course.getCourseName();
         this.meetDay = course.getMeetDay();
@@ -32,8 +34,8 @@ public class UserSchedule {
 
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getCourseID() {
@@ -71,7 +73,7 @@ public class UserSchedule {
     @Override
     public String toString() {
         return "UserSchedule{" +
-                "userName='" + userName + '\'' +
+                "userName='" + username + '\'' +
                 ", courseID='" + courseID + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", meetDay='" + meetDay + '\'' +

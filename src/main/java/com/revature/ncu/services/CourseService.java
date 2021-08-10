@@ -21,6 +21,10 @@ public class CourseService {
         return courseRepo.save(newCourse);
     }
 
+    public UserSchedule register(UserSchedule newSchedule){
+        return uCourseRepo.save(newSchedule);
+    }
+
     public Course search(String courseID){
         Course foundCourse = courseRepo.findByCourseID(courseID);
         return foundCourse;
@@ -44,8 +48,14 @@ public class CourseService {
         return null;
     }
 
-    public UserSchedule register(UserSchedule newSchedule){
-        return uCourseRepo.save(newSchedule);
+    public List<UserSchedule> view(String username){
+        List<UserSchedule> scheduleList = uCourseRepo.findSchedule(username);
+        for(UserSchedule schedule : scheduleList) {
+            System.out.println(schedule);
+        }
+        return null;
     }
+
+
 
 }

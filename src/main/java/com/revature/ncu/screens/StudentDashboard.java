@@ -50,9 +50,9 @@ public class StudentDashboard extends Screens {
                 System.out.println("Success");
                 router.navigate("/sdashboard");
                 break;
-
-
             case "3":
+                courseService.view(session.getCurrentUser().getUsername());
+                break;
             case "4":
             case "5":
                 System.out.print("Navigating back to Welcome Screen");
