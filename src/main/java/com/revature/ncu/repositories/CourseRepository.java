@@ -104,11 +104,6 @@ public class CourseRepository implements CrudRepository<Course>{
 
         try {
 
-//            Document update = new Document("courseName", newCourseInfo.getCourseName())
-//                    .append("courseTeacher", newCourseInfo.getCourseTeacher())
-//                    .append("courseDescription", newCourseInfo.getCourseDescription())
-//                    .append("meetDay", newCourseInfo.getMeetDay())
-//                    .append("meetTime", newCourseInfo.getMeetTime());
             MongoClient mongoClient = MongoFactory.getInstance().getConnection();
 
             MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
@@ -119,11 +114,6 @@ public class CourseRepository implements CrudRepository<Course>{
                    Updates.set("courseTeacher", newCourseInfo.getCourseTeacher()),
                    Updates.set("meetDay", newCourseInfo.getMeetDay()),
                    Updates.set("meetTime", newCourseInfo.getMeetTime())));
-
-//                    Updates.set("courseDescription", newCourseInfo.getCourseDescription()),
-//                    Updates.set("courseTeacher", newCourseInfo.getCourseTeacher()),
-//                    Updates.set("meetDay", newCourseInfo.getMeetDay()),
-//                    Updates.set("meetTime", newCourseInfo.getMeetTime()));
 
            return updateCourse;
         }catch (Exception e) {
