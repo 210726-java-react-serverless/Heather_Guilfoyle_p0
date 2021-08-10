@@ -39,6 +39,11 @@ public class CourseService {
         return removerCourse;
     }
 
+    public UserSchedule delete(String username, String courseID){
+        UserSchedule removeCourse = uCourseRepo.removeCourse(username, courseID);
+        return removeCourse;
+    }
+
     public Course update(Course course, Course newCourseInfo){
         Course updateCourse = courseRepo.updateCourse(course, newCourseInfo);
         return updateCourse;
