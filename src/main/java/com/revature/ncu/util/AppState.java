@@ -29,7 +29,7 @@ public class AppState {
         router.addScreen(new WelcomeScreen(consoleReader, router));
         router.addScreen(new RegisterScreen(consoleReader,router, userService)); // TODO do that on all the screens that need userService
         router.addScreen(new LoginScreen(consoleReader,router, userService));
-        router.addScreen(new StudentDashboard(consoleReader, router, userSession));
+        router.addScreen(new StudentDashboard(consoleReader, router, userSession,courseService));
         router.addScreen(new FacultyDashboard(consoleReader, router, courseService, userSession));
     }
 
