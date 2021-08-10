@@ -32,7 +32,12 @@ public class CourseService {
         return updateCourse;
     }
 
-    public List<Course> viewAll(){
-        return courseRepo.findAll();
+    public List<Course> viewAll() {
+        List<Course> courseList = courseRepo.findAll();
+        for (Course course : courseList) {
+            System.out.println(course);
+        }
+        return null;
     }
+
 }

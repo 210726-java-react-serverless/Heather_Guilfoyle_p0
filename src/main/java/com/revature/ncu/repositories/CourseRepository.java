@@ -14,7 +14,6 @@ import com.revature.ncu.models.Course;
 import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +60,6 @@ public class CourseRepository implements CrudRepository<Course>{
            for(Document course : courseList){
                Course courses = mapper.readValue(course.toJson(), Course.class);
                allCourseList.add(courses);
-
            }
            return allCourseList;
 

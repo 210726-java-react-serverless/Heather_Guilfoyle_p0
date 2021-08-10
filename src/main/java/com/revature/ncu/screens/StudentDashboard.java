@@ -1,5 +1,6 @@
 package com.revature.ncu.screens;
 
+import com.revature.ncu.models.Course;
 import com.revature.ncu.services.CourseService;
 import com.revature.ncu.util.ScreenRouter;
 import com.revature.ncu.util.UserSession;
@@ -35,7 +36,8 @@ public class StudentDashboard extends Screens {
         switch(userSelection){
 
             case "1":
-                System.out.println(courseService.viewAll());
+                courseService.viewAll();
+
                 break;
         }
     }
