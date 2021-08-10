@@ -49,6 +49,7 @@ public class StudentDashboard extends Screens {
                 courseService.register(newSchedule);
                 System.out.println("Success");
                 router.navigate("/sdashboard");
+                break;
 
 
             case "3":
