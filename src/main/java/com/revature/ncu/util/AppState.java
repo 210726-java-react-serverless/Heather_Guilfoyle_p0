@@ -1,6 +1,7 @@
 package com.revature.ncu.util;
 
 import com.revature.ncu.repositories.CourseRepository;
+import com.revature.ncu.repositories.UserCoursesRepository;
 import com.revature.ncu.repositories.UserRepository;
 import com.revature.ncu.screens.*;
 import com.revature.ncu.services.CourseService;
@@ -23,8 +24,10 @@ public class AppState {
         UserRepository userRepo = new UserRepository();
         UserService userService = new UserService(userRepo, userSession);
 
+        UserCoursesRepository uCourseRepo = new UserCoursesRepository();
+
         CourseRepository courseRepo = new CourseRepository();
-        CourseService courseService = new CourseService(courseRepo);
+        CourseService courseService = new CourseService(courseRepo, uCourseRepo);
 
         router.addScreen(new WelcomeScreen(consoleReader, router));
         router.addScreen(new RegisterScreen(consoleReader,router, userService)); // TODO do that on all the screens that need userService

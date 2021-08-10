@@ -1,16 +1,20 @@
 package com.revature.ncu.services;
 
 import com.revature.ncu.models.Course;
+import com.revature.ncu.models.UserSchedule;
 import com.revature.ncu.repositories.CourseRepository;
+import com.revature.ncu.repositories.UserCoursesRepository;
 
 import java.util.List;
 
 public class CourseService {
 
     private final CourseRepository courseRepo;
+    private final UserCoursesRepository uCourseRepo;
 
-    public CourseService(CourseRepository courseRepo){
+    public CourseService(CourseRepository courseRepo,UserCoursesRepository uCourseRepo){
         this.courseRepo = courseRepo;
+        this.uCourseRepo = uCourseRepo;
     }
 
     public Course register(Course newCourse){
@@ -38,6 +42,10 @@ public class CourseService {
             System.out.println(course);
         }
         return null;
+    }
+
+    public UserSchedule register(UserSchedule newSchedule){
+        return uCourseRepo.save(newSchedule);
     }
 
 }

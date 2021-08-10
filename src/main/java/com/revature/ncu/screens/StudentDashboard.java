@@ -1,6 +1,7 @@
 package com.revature.ncu.screens;
 
 import com.revature.ncu.models.Course;
+import com.revature.ncu.models.UserSchedule;
 import com.revature.ncu.services.CourseService;
 import com.revature.ncu.util.ScreenRouter;
 import com.revature.ncu.util.UserSession;
@@ -26,7 +27,7 @@ public class StudentDashboard extends Screens {
                 "2) Register for new course\n" +
                 "3) View Your Schedule\n" +
                 "4) Remove course from Schedule\n" +
-                "4) Log out\n" +
+                "5) Log out\n" +
                 "> ";
 
         System.out.print(menu);
@@ -37,8 +38,24 @@ public class StudentDashboard extends Screens {
 
             case "1":
                 courseService.viewAll();
-
                 break;
+            case "2":
+                System.out.print("Type the courseID for the course you would like to add. \n" +
+                        ">");
+                Course courseToAdd = courseService.search(consoleReader.readLine());
+                UserSchedule newSchedule = new UserSchedule(courseToAdd, session.getCurrentUser().getUsername());
+                System.out.println(newSchedule);
+
+                courseService.register(newSchedule);
+                System.out.println("Success");
+                router.navigate("/sdashboard");
+
+
+            case "3":
+            case "4":
+            case "5":
+                System.out.print("Navigating back to Welcome Screen");
+                router.navigate("/welcome");
         }
     }
 }
