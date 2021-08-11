@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.revature.ncu.models.Course;
@@ -15,6 +13,7 @@ import com.revature.ncu.util.MongoFactory;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CourseRepository implements CrudRepository<Course>{
@@ -113,14 +112,25 @@ public class CourseRepository implements CrudRepository<Course>{
 
             MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
             MongoCollection<Document> usersCollection = ncuDb.getCollection("classes");
+            MongoCollection<Document> usersCourseCollection = ncuDb.getCollection("schedule");
             Document queryDoc = new Document("courseID", courseID);
             Document removeDoc = usersCollection.find(queryDoc).first();
+
+            FindIterable<Document> removeDoc2 = usersCourseCollection.find(queryDoc);
+            MongoCursor<Document> cursor = removeDoc2.iterator();
+                while (cursor.hasNext()){
+                   Document doc = cursor.next();
+                   usersCourseCollection.deleteOne(doc);
+                }
 
             if(removeDoc == null){
                 return null;
             }
 
             usersCollection.deleteOne(removeDoc);
+
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
