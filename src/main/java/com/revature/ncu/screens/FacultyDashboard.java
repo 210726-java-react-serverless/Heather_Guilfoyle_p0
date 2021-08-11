@@ -77,6 +77,12 @@ public class FacultyDashboard extends Screens {
                 ">");
                 Course courseToRemove = courseService.search(consoleReader.readLine());
                 System.out.println(courseToRemove);
+                System.out.print("\nPlease type in the courseID again to confirm or press 'b' to go back. \n" + ">");
+                String selection = consoleReader.readLine();
+                if(selection.equals("b")) {
+                    router.navigate("/fdashboard");
+                    return;
+                }
                 courseService.delete(courseToRemove);
                 break;
             case "4":

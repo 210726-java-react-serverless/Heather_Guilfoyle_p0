@@ -58,7 +58,7 @@ public class StudentDashboard extends Screens {
                         ">");
                 UserSchedule courseToRemove = courseService.searchCourseToDelete(session.getCurrentUser().getUsername(), consoleReader.readLine());
                 System.out.println(courseToRemove);
-                System.out.print("Please type in the courseID again to confirm or press b to select a different class\n" + ">");
+                System.out.print("\nPlease type in the courseID again to confirm or press 'b' to go back. \n" + ">");
                 String selection = consoleReader.readLine();
                 if(selection.equals("b")) {
                     router.navigate("/sdashboard");
