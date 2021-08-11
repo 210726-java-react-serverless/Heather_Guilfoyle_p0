@@ -5,6 +5,8 @@ import com.revature.ncu.models.Course;
 import com.revature.ncu.services.CourseService;
 import com.revature.ncu.util.ScreenRouter;
 import com.revature.ncu.util.UserSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 
@@ -12,6 +14,7 @@ public class FacultyDashboard extends Screens {
 
     private final CourseService courseService;
     private final UserSession session;
+    private final Logger logger = LogManager.getLogger(FacultyDashboard.class);
 
     public FacultyDashboard(BufferedReader consoleReader, ScreenRouter router, CourseService courseService, UserSession session){
         super("FacultyDashboard", "/fdashboard", consoleReader, router);
@@ -62,9 +65,9 @@ public class FacultyDashboard extends Screens {
                 Course newCourse = new Course(courseID, courseName, courseDescription, courseTeacher, meetDay, meetTime);
                 System.out.println(newCourse);
 
-                //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
                 courseService.register(newCourse);
                 System.out.println("Success");
+                logger.info("course successfully added");
                 router.navigate("/fdashboard");
 
                 break;
@@ -77,14 +80,16 @@ public class FacultyDashboard extends Screens {
                 ">");
                 Course courseToRemove = courseService.search(consoleReader.readLine());
                 System.out.println(courseToRemove);
-                System.out.print("\nPlease type in the courseID again to confirm or press 'b' to go back. \n" + ">");
+                System.out.print("\nPlease type in the courseID again to confirm or press \"b\" to go back. \n" + ">");
                 String selection = consoleReader.readLine();
-                if(selection.equals("b")) {
+                if(selection.equalsIgnoreCase("b")) {
                     router.navigate("/fdashboard");
                     return;
                 }
                 courseService.delete(courseToRemove);
+                logger.info("course deleted");
                 break;
+
             case "4":
                 courseService.viewAll();
                 break;
@@ -98,6 +103,10 @@ public class FacultyDashboard extends Screens {
 
     }
     //moved down here because I didn't want a switch case inside a switch case.
+    /**
+     * updateScreen is a void method that holds all the logic for a user to update specific fields of a course
+     * It connects to the UserRepository through the user Service method
+     * */
     private void updateScreen(){
        try {
            System.out.print("Type the courseID for the course you would like to edit. \n" +
@@ -149,6 +158,7 @@ public class FacultyDashboard extends Screens {
                    break;
                default:
                System.out.print("Please pick a number between 1 - 6");
+               logger.debug("user did not select one of the working choices");
            }
        } catch (Exception e){
            e.printStackTrace();
