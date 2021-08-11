@@ -28,7 +28,8 @@ public class FacultyDashboard extends Screens {
                 "1) Add new Course\n" +
                 "2) Edit Courses\n" +
                 "3) Remove Course\n" +
-                "4) Log out\n" +
+                "4) View Course Catalog\n" +
+                "5) Log out\n" +
                 "> ";
 
         System.out.print(menu);
@@ -78,12 +79,14 @@ public class FacultyDashboard extends Screens {
                 System.out.println(courseToRemove);
                 courseService.delete(courseToRemove);
                 break;
-
             case "4":
+                courseService.viewAll();
+                break;
+            case "5":
                 System.out.print("Navigating back to Welcome Screen");
                 router.navigate("/welcome");
             default:
-                System.out.println("Please pick a number between 1 - 4");
+                System.out.println("Please pick a number between 1 - 5");
 
         }
 
