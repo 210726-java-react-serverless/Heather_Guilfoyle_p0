@@ -96,6 +96,7 @@ public class FacultyDashboard extends Screens {
             case "5":
                 System.out.print("Navigating back to Welcome Screen");
                 router.navigate("/welcome");
+                break;
             default:
                 System.out.println("Please pick a number between 1 - 5");
 
