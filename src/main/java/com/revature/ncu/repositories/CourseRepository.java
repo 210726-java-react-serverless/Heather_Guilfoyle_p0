@@ -147,10 +147,16 @@ public class CourseRepository implements CrudRepository<Course>{
 
             MongoDatabase ncuDb = mongoClient.getDatabase("ncu");
             MongoCollection<Document> usersCollection = ncuDb.getCollection("classes");
+            MongoCollection<Document> usersCourseCollection = ncuDb.getCollection("schedule");
            usersCollection.updateOne(Filters.eq("courseID", updateCourse.getCourseID()),Updates.combine(
                    Updates.set("courseName", newCourseInfo.getCourseName()),
                    Updates.set("courseDescription", newCourseInfo.getCourseDescription()),
                    Updates.set("courseTeacher", newCourseInfo.getCourseTeacher()),
+                   Updates.set("meetDay", newCourseInfo.getMeetDay()),
+                   Updates.set("meetTime", newCourseInfo.getMeetTime())));
+
+           usersCourseCollection.updateOne(Filters.eq("courseID", updateCourse.getCourseID()),Updates.combine(
+                   Updates.set("courseName", newCourseInfo.getCourseName()),
                    Updates.set("meetDay", newCourseInfo.getMeetDay()),
                    Updates.set("meetTime", newCourseInfo.getMeetTime())));
 
