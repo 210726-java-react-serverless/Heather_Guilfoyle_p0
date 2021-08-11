@@ -3,12 +3,15 @@ package com.revature.ncu.screens;
 import com.revature.ncu.models.User;
 import com.revature.ncu.services.UserService;
 import com.revature.ncu.util.ScreenRouter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 
 public class LoginScreen extends Screens {
 
     private final UserService userService;
+    private final Logger logger = LogManager.getLogger(LoginScreen.class);
 
     public LoginScreen(BufferedReader consoleReader, ScreenRouter router, UserService userService){
         super("LoginScreen", "/login", consoleReader, router);
@@ -31,15 +34,19 @@ public class LoginScreen extends Screens {
             User authUser = userService.login(username, password);
 
                 if(authUser.getMemberType().equalsIgnoreCase("f")) {
+                    logger.info("Successful Faculty Login");
                     router.navigate("/fdashboard");
+
                 }if(authUser.getMemberType().equalsIgnoreCase("s")){
+                    logger.info("Successful Student login");
                     router.navigate("/sdashboard");
                 }
 
         } catch (RuntimeException re) {
             System.out.println("No user found");
+            logger.debug("No user found");
+            router.navigate("/welcome");
         }
 
-        //TODO If username and password is correct navigate to correct dashboard otherwise have them try again.
     }
 }

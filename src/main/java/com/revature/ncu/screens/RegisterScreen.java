@@ -3,6 +3,8 @@ package com.revature.ncu.screens;
 import com.revature.ncu.models.User;
 import com.revature.ncu.services.UserService;
 import com.revature.ncu.util.ScreenRouter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 
@@ -10,6 +12,7 @@ import java.io.BufferedReader;
 public class RegisterScreen extends Screens {
 
     private final UserService userService;
+    private final Logger logger = LogManager.getLogger(RegisterScreen.class);
 
     public RegisterScreen(BufferedReader consoleReader, ScreenRouter router, UserService userService) {
         super("RegisterScreen", "/register", consoleReader, router);
@@ -41,9 +44,13 @@ public class RegisterScreen extends Screens {
         User newUser = new User(firstName, lastName, email, username, password, memberType);
         System.out.println(newUser);
 
-        //TODO Validate Registration is successful. If true System.out.println "Success." and navigate to dashboard.
-        userService.register(newUser);
-        System.out.println("Success");
-        router.navigate("/welcome");
+        try {
+            userService.register(newUser);
+            logger.info("Success");
+            router.navigate("/welcome");
+        } catch (Exception e) {
+            logger.debug("User not registered");
+            router.navigate("/welcome");
+        }
     }
 }
