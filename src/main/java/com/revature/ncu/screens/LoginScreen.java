@@ -33,11 +33,11 @@ public class LoginScreen extends Screens {
         try {
             User authUser = userService.login(username, password);
 
-                if(authUser.getMemberType().equalsIgnoreCase("f")) {
+                if(authUser.getMemberType().equalsIgnoreCase("F")) {
                     logger.info("Successful Faculty Login");
                     router.navigate("/fdashboard");
 
-                }if(authUser.getMemberType().equalsIgnoreCase("s")){
+                }if(authUser.getMemberType().equalsIgnoreCase("S")){
                     logger.info("Successful Student login");
                     router.navigate("/sdashboard");
                 }
