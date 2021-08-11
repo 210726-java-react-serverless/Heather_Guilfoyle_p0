@@ -72,7 +72,7 @@ public class RegisterScreen extends Screens {
             System.out.print("You must enter something in this field\n" + "Username: ");
             email = consoleReader.readLine().toUpperCase();
         }
-        if(memberType != "S" || memberType != "F") {
+        if(!memberType.equalsIgnoreCase("S") || !memberType.equalsIgnoreCase( "F")) {
             logger.debug("User did not put in good information");
             System.out.println("You must choose \"s\" or \"F\"" + ">");
             memberType = consoleReader.readLine().toUpperCase();
